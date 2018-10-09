@@ -102,8 +102,61 @@ public class Colosseum {
      * (Look, we can return objects too!)
      */
     public static Pokemon buildPokemon() {
-        Pokemon returnPokemon = null;
-        return returnPokemon;
+        myScan = new Scanner(System.in);
+        Pokemon tempPokemon = new Pokemon();
+
+
+        System.out.print("Please name your Pokemon:");
+        tempPokemon.name = myScan.nextLine();
+
+        System.out.print("How many hit points will it have?");
+        tempPokemon.hitPoints = myScan.nextInt();
+
+        while (tempPokemon.hitPoints < 0 || tempPokemon.hitPoints > MAX_HIT_POINTS) {
+            System.out.print("Sorry. Hit points must be between 1 and 50:");
+            tempPokemon.hitPoints = myScan.nextInt();
+
+        }
+
+        System.out.print("Split fifty points between attack level and defense level");
+        System.out.print("Enter your attack level (1-49):");
+        tempPokemon.attackLevel = myScan.nextInt();
+
+        while (tempPokemon.attackLevel < 0 || tempPokemon.attackLevel > tempPokemon.hitPoints) {
+            System.out.print("Sorry. The attack level must be between 1 and 49:");
+            tempPokemon.attackLevel = myScan.nextInt();
+        }
+
+        System.out.print("Enter your defense level (1-3):");
+        tempPokemon.defenseLevel = myScan.nextInt();
+
+        while (tempPokemon.attackLevel < 0 || tempPokemon.attackLevel > tempPokemon.hitPoints - tempPokemon.defenseLevel + 1) {
+            System.out.print("Sorry. The attack level must be between 1 and 49:");
+            tempPokemon.attackLevel = myScan.nextInt();
+        }
+        System.out.print("Select from the following Pokemon types:\n" +
+                "     * 1 - Electric Pokemon\n" +
+                "     * 2 - Fire Pokemon\n" +
+                "     * 3 - Water Pokemon:");
+
+        int x = myScan.nextInt();
+        while (x != 1 && x != 2 && x != 3) {
+            System.out.print("Sorry. Type must be between 1 and 3:");
+            x = myScan.nextInt();
+        }
+        if (x == 1) {
+            tempPokemon = new ElectricPokemon();
+
+        } else if (x == 2) {
+            tempPokemon = new FirePokemon();
+
+        } else if (x == 3) {
+            tempPokemon = new WaterPokemon();
+
+        }
+
+
+        return tempPokemon;
     }
 
     /**
